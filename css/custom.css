@@ -1,0 +1,87 @@
+/* custom.css */
+
+/* General styles */
+body {
+    background-color: #f8f9fa;
+}
+
+/* Navigation */
+.navbar-brand {
+    font-weight: bold;
+}
+
+/* Login page */
+.divider {
+    display: flex;
+    align-items: center;
+    text-align: center;
+    margin: 20px 0;
+}
+
+.divider::before,
+.divider::after {
+    content: '';
+    flex: 1;
+    border-bottom: 1px solid #dee2e6;
+}
+
+.divider-text {
+    padding: 0 10px;
+    color: #6c757d;
+}
+
+/* Content upload area */
+.upload-area {
+    border: 2px dashed #dee2e6;
+    border-radius: 5px;
+    padding: 30px;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.upload-area:hover {
+    border-color: #6c757d;
+    background-color: #f1f3f5;
+}
+
+/* Dashboard cards */
+.card {
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    margin-bottom: 20px;
+}
+
+.card-header {
+    background-color: #f8f9fa;
+    font-weight: 500;
+}
+
+/* Content details */
+.content-preview {
+    width: 100%;
+    height: 150px;
+    object-fit: cover;
+    border-radius: 5px;
+}
+
+/* Verification badge */
+.verification-badge {
+    display: inline-block;
+    padding: 5px 10px;
+    background-color: #28a745;
+    color: white;
+    border-radius: 3px;
+    font-size: 14px;
+}
+
+/* Activity list */
+.activity-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+/* Modal styling */
+.modal-header {
+    background-color: #f8f9fa;
+}
