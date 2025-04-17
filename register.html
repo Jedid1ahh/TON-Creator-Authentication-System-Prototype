@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register Content - TON Creator Authentication System</title>
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/custom.css">
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+        <div class="container">
+            <a class="navbar-brand" href="#">TCAS</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="register.html">Register Content</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="verify.html">Verify Content</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="dashboard.html">Dashboard</a>
+                    </li>
+                </ul>
+                <div class="d-flex">
+                    <button id="connectWalletBtn" class="btn btn-light">Connect Wallet</button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container mt-5">
+        <h2>Register New Content</h2>
+        <p class="lead">Register your original content on the TON blockchain to establish proof of ownership.</p>
+        
+        <div class="row mt-4">
+            <div class="col-lg-8">
+                <div class="card">
+                    <div class="card-body">
+                        <div id="walletRequired" class="alert alert-warning">
+                            <strong>Wallet Connection Required</strong>
+                            <p>Please connect your TON wallet to register content.</p>
+                        </div>
+                        
+                        <div id="registrationForm" style="display: none;">
+                            <form id="contentForm">
+                                <div class="mb-3">
+                                    <label for="contentTitle" class="form-label">Content Title</label>
+                                    <input type="text" class="form-control" id="contentTitle" required>
+                                </div>
+                                
+                                <div class="mb-3">
+                                    <label for="contentDescription" class="form-label">Description</label>
+                                    <textarea class="form-control" id="contentDescription" rows="3" required></textarea>
+                                </div>
+                                
+                                <div class="mb-3">
+                                    <label for="contentFile" class="form-label">Upload Content File</label>
+                                    <input class="form-control" type="file" id="contentFile">
+                                    <div class="form-text">Or paste URL below</div>
+                                </div>
+                                
+                                <div class="mb-3">
+                                    <label for="contentUrl" class="form-label">Content URL (optional)</label>
+                                    <input type="url" class="form-control" id="contentUrl">
+                                </div>
+                                
+                                <div class="mb-3">
+                                    <label class="form-label">Rights Management</label>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" id="allowCommercial">
+                                        <label class="form-check-label" for="allowCommercial">
+                                            Allow commercial use
+                                        </label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" id="allowDerivatives">
+                                        <label class="form-check-label" for="allowDerivatives">
+                                            Allow derivative works
+                                        </label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" id="requireAttribution" checked>
+                                        <label class="form-check-label" for="requireAttribution">
+                                            Require attribution
+                                        </label>
+                                    </div>
+                                </div>
+                                
+                                <div class="d-grid">
+                                    <button type="submit" class="btn btn-primary">Register Content</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-lg-4">
+                <div class="card">
+                    <div class="card-header">
+                        <h5>How It Works</h5>
+                    </div>
+                    <div class="card-body">
+                        <ol>
+                            <li>Upload your content or provide a URL</li>
+                            <li>Set usage rights and permissions</li>
+                            <li>Sign the transaction with your TON wallet</li>
+                            <li>Your content hash is registered on the blockchain</li>
+                            <li>Receive a verification certificate</li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal for Registration Success -->
+    <div class="modal fade" id="registrationSuccessModal" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header bg-success text-white">
+                    <h5 class="modal-title">Registration Successful!</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <p>Your content has been successfully registered on the TON blockchain.</p>
+                    <div class="mb-3">
+                        <label class="form-label">Content Hash:</label>
+                        <input type="text" class="form-control" id="contentHashResult" readonly>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Transaction ID:</label>
+                        <input type="text" class="form-control" id="transactionIdResult" readonly>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <a href="dashboard.html" class="btn btn-primary">Go to Dashboard</a>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/ton-sdk.js"></script>
+    <script src="js/wallet.js"></script>
+    <script src="js/registration.js"></script>
+</body>
+</html>

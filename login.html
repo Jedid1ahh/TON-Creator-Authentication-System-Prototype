@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - TON Creator Authentication System</title>
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/custom.css">
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+        <div class="container">
+            <a class="navbar-brand" href="#">TCAS</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html">Home</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container mt-5">
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-header">
+                        <h4 class="mb-0">Login to Your Account</h4>
+                    </div>
+                    <div class="card-body">
+                        <div class="mb-4 text-center">
+                            <button id="walletLoginBtn" class="btn btn-primary btn-lg w-100">
+                                Connect with TON Wallet
+                            </button>
+                        </div>
+                        
+                        <div class="divider my-4">
+                            <span class="divider-text">Or</span>
+                        </div>
+                        
+                        <form id="loginForm">
+                            <div class="mb-3">
+                                <label for="email" class="form-label">Email address</label>
+                                <input type="email" class="form-control" id="email" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="password" class="form-label">Password</label>
+                                <input type="password" class="form-control" id="password" required>
+                            </div>
+                            <div class="mb-3 form-check">
+                                <input type="checkbox" class="form-check-input" id="rememberMe">
+                                <label class="form-check-label" for="rememberMe">Remember me</label>
+                            </div>
+                            <button type="submit" class="btn btn-success w-100">Login</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/ton-sdk.js"></script>
+    <script src="js/wallet.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const walletLoginBtn = document.getElementById('walletLoginBtn');
+            const loginForm = document.getElementById('loginForm');
+            
+            walletLoginBtn.addEventListener('click', async () => {
+                await connectWallet();
+                if (walletConnected) {
+                    window.location.href = 'dashboard.html';
+                }
+            });
+            
+            loginForm.addEventListener('submit', (e) => {
+                e.preventDefault();
+                // Simulate login (in a real app, this would verify credentials)
+                alert('Login successful!');
+                window.location.href = 'dashboard.html';
+            });
+        });
+    </script>
+</body>
+</html>

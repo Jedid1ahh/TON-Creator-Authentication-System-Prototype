@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - TON Creator Authentication System</title>
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/custom.css">
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+        <div class="container">
+            <a class="navbar-brand" href="#">TCAS</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="register.html">Register Content</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="verify.html">Verify Content</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="dashboard.html">Dashboard</a>
+                    </li>
+                </ul>
+                <div class="d-flex">
+                    <button id="connectWalletBtn" class="btn btn-light">Connect Wallet</button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container mt-5">
+        <div id="walletRequired" class="alert alert-warning">
+            <strong>Wallet Connection Required</strong>
+            <p>Please connect your TON wallet to view your dashboard.</p>
+        </div>
+        
+        <div id="dashboardContent" style="display: none;">
+            <div class="d-flex justify-content-between align-items-center mb-4">
+                <h2>Creator Dashboard</h2>
+                <a href="register.html" class="btn btn-primary">Register New Content</a>
+            </div>
+            
+            <div class="row">
+                <div class="col-md-8">
+                    <div class="card mb-4">
+                        <div class="card-header">
+                            <h5>Your Registered Content</h5>
+                        </div>
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table class="table table-hover">
+                                    <thead>
+                                        <tr>
+                                            <th>Title</th>
+                                            <th>Date Registered</th>
+                                            <th>Status</th>
+                                            <th>Actions</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="registeredContentTable">
+                                        <!-- Content will be loaded dynamically -->
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div id="noContentMessage" class="text-center py-4 d-none">
+                                <p>You haven't registered any content yet.</p>
+                                <a href="register.html" class="btn btn-primary">Register Your First Content</a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="card mb-4">
+                        <div class="card-header">
+                            <h5>Recent Activity</h5>
+                        </div>
+                        <div class="card-body">
+                            <ul class="list-group" id="activityList">
+                                <!-- Activity will be loaded dynamically -->
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-md-4">
+                    <div class="card mb-4">
+                        <div class="card-header">
+                            <h5>Account Information</h5>
+                        </div>
+                        <div class="card-body">
+                            <div class="mb-3">
+                                <label class="form-label">Wallet Address:</label>
+                                <div id="userWalletAddress" class="form-control bg-light"></div>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Registered Content:</label>
+                                <div id="contentCount" class="form-control bg-light">0</div>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Verification Requests:</label>
+                                <div class="form-control bg-light">0</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="card mb-4">
+                        <div class="card-header">
+                            <h5>Quick Actions</h5>
+                        </div>
+                        <div class="card-body">
+                            <div class="d-grid gap-2">
+                                <a href="register.html" class="btn btn-primary">Register Content</a>
+                                <a href="#" class="btn btn-outline-primary">Generate Certificate</a>
+                                <a href="#" class="btn btn-outline-primary">Create Verification Badge</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal for Content Details -->
+    <div class="modal fade" id="contentDetailsModal" tabindex="-1">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="detailsTitle">Content Details</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="mb-3">
+                        <label class="form-label">Description</label>
+                        <div id="detailsDescription" class="form-control bg-light"></div>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Content Hash</label>
+                        <div id="detailsHash" class="form-control bg-light"></div>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Transaction ID</label>
+                        <div id="detailsTransactionId" class="form-control bg-light"></div>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Registration Date</label>
+                        <div id="detailsDate" class="form-control bg-light"></div>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Verification URL</label>
+                        <div class="input-group">
+                            <input type="text" id="verificationUrl" class="form-control" readonly>
+                            <button class="btn btn-outline-secondary" type="button" onclick="copyToClipboard('verificationUrl')">Copy</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary">Generate Certificate</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/ton-sdk.js"></script>
+    <script src="js/wallet.js"></script>
+    <script src="js/dashboard.js"></script>
+</body>
+</html>

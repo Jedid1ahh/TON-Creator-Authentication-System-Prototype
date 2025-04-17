@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Verify Content - TON Creator Authentication System</title>
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/custom.css">
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+        <div class="container">
+            <a class="navbar-brand" href="#">TCAS</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="register.html">Register Content</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="verify.html">Verify Content</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="dashboard.html">Dashboard</a>
+                    </li>
+                </ul>
+                <div class="d-flex">
+                    <button id="connectWalletBtn" class="btn btn-light">Connect Wallet</button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container mt-5">
+        <h2>Verify Content Authenticity</h2>
+        <p class="lead">Check if content has been registered on the TON blockchain and view ownership information.</p>
+        
+        <div class="row mt-4">
+            <div class="col-lg-8">
+                <div class="card">
+                    <div class="card-body">
+                        <ul class="nav nav-tabs" id="verifyTabs">
+                            <li class="nav-item">
+                                <a class="nav-link active" data-bs-toggle="tab" href="#fileTab">Upload File</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" data-bs-toggle="tab" href="#urlTab">Check URL</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" data-bs-toggle="tab" href="#hashTab">Hash Lookup</a>
+                            </li>
+                        </ul>
+                        
+                        <div class="tab-content p-3">
+                            <div class="tab-pane active" id="fileTab">
+                                <form id="fileVerifyForm">
+                                    <div class="mb-3">
+                                        <label for="verifyFile" class="form-label">Upload file to verify</label>
+                                        <input class="form-control" type="file" id="verifyFile" required>
+                                    </div>
+                                    <div class="d-grid">
+                                        <button type="submit" class="btn btn-primary">Verify File</button>
+                                    </div>
+                                </form>
+                            </div>
+                            
+                            <div class="tab-pane" id="urlTab">
+                                <form id="urlVerifyForm">
+                                    <div class="mb-3">
+                                        <label for="verifyUrl" class="form-label">Content URL</label>
+                                        <input type="url" class="form-control" id="verifyUrl" required>
+                                    </div>
+                                    <div class="d-grid">
+                                        <button type="submit" class="btn btn-primary">Verify URL</button>
+                                    </div>
+                                </form>
+                            </div>
+                            
+                            <div class="tab-pane" id="hashTab">
+                                <form id="hashVerifyForm">
+                                    <div class="mb-3">
+                                        <label for="verifyHash" class="form-label">Content Hash</label>
+                                        <input type="text" class="form-control" id="verifyHash" placeholder="0x..." required>
+                                    </div>
+                                    <div class="d-grid">
+                                        <button type="submit" class="btn btn-primary">Lookup Hash</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Verification Results -->
+                <div id="verificationResults" class="card mt-4" style="display: none;">
+                    <div class="card-header bg-success text-white">
+                        <h5 class="mb-0">Verification Results</h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="mb-3">
+                            <label class="form-label">Content Title:</label>
+                            <div id="resultTitle" class="form-control bg-light"></div>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Registered By:</label>
+                            <div id="resultOwner" class="form-control bg-light"></div>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Registration Date:</label>
+                            <div id="resultDate" class="form-control bg-light"></div>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Content Hash:</label>
+                            <div id="resultHash" class="form-control bg-light"></div>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Rights Information:</label>
+                            <ul id="resultRights" class="list-group"></ul>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Verification Failed -->
+                <div id="verificationFailed" class="card mt-4 bg-light" style="display: none;">
+                    <div class="card-header bg-warning">
+                        <h5 class="mb-0">Not Found</h5>
+                    </div>
+                    <div class="card-body">
+                        <p>This content has not been registered in the system.</p>
+                        <a href="register.html" class="btn btn-primary">Register This Content</a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-lg-4">
+                <div class="card">
+                    <div class="card-header">
+                        <h5>About Verification</h5>
+                    </div>
+                    <div class="card-body">
+                        <p>The verification process checks if content has been registered on the TON blockchain and provides ownership information.</p>
+                        <p>You can verify content by:</p>
+                        <ul>
+                            <li>Uploading the file</li>
+                            <li>Providing a URL</li>
+                            <li>Looking up a known content hash</li>
+                        </ul>
+                        <p>Verification is free and doesn't require a wallet connection.</p>
+                    </div>
+                </div>
+                
+                <div class="card mt-4">
+                    <div class="card-header">
+                        <h5>Certificate of Authenticity</h5>
+                    </div>
+                    <div class="card-body">
+                        <p>Once verification is successful, you can download a Certificate of Authenticity for the content.</p>
+                        <button id="downloadCertBtn" class="btn btn-secondary w-100" disabled>
+                            Download Certificate
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="js/ton-sdk.js"></script>
+    <script src="js/wallet.js"></script>
+    <script src="js/verification.js"></script>
+</body>
+</html>

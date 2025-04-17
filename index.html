@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TON Creator Authentication System</title>
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/custom.css">
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+        <div class="container">
+            <a class="navbar-brand" href="#">TCAS</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="register.html">Register Content</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="verify.html">Verify Content</a>
+                    </li>
+                </ul>
+                <div class="d-flex">
+                    <a href="login.html" class="btn btn-outline-light me-2">Login</a>
+                    <button id="connectWalletBtn" class="btn btn-light">Connect Wallet</button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container mt-5">
+        <div class="row">
+            <div class="col-md-6">
+                <h1>TON Creator Authentication System</h1>
+                <p class="lead">A decentralized solution for content creators to verify ownership and manage rights on the TON blockchain.</p>
+                <div class="mt-4">
+                    <a href="register.html" class="btn btn-primary me-2">Register Content</a>
+                    <a href="verify.html" class="btn btn-secondary">Verify Content</a>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <img src="img/placeholder.jpg" class="img-fluid rounded" alt="System illustration">
+            </div>
+        </div>
+
+        <div class="row mt-5">
+            <div class="col-md-4">
+                <div class="card mb-4">
+                    <div class="card-body">
+                        <h3>Register</h3>
+                        <p>Register your content on the TON blockchain to establish verifiable ownership.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card mb-4">
+                    <div class="card-body">
+                        <h3>Verify</h3>
+                        <p>Verify content authenticity and check ownership information.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card mb-4">
+                    <div class="card-body">
+                        <h3>Manage</h3>
+                        <p>Control usage rights and track where your content appears.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer class="bg-light py-4 mt-5">
+        <div class="container text-center">
+            <p>TON Creator Authentication System - Prototype</p>
+        </div>
+    </footer>
+
+    <script src="js/ton-sdk.js"></script>
+    <script src="js/wallet.js"></script>
+</body>
+</html>
